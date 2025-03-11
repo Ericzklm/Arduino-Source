@@ -11,6 +11,10 @@ on:
       version:
         description: 'Version for the manual release'
         required: true
+      jobs:
+        description: 'Number of parallel jobs to build with'
+        default: 1
+        type: number
 
 jobs:
   build:
@@ -42,7 +46,7 @@ jobs:
 
       # macos-15 runner should have 3 cores
       - name: Build SerialPrograms.app
-        run: cmake --build . -j $(nproc)
+        run: cmake --build . -j ${{ github.event.inputs.jobs }}
 
       # Use macdeployqt to bundle the app with dependencies
       - name: Run macdeployqt
