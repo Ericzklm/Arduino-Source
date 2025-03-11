@@ -5,12 +5,12 @@ on:
     tags:
       # Start MacOS release flow when a new version tag is created
       - 'v*'
-    workflow_dispatch:
-      # Manual release / testing
-      inputs:
-        version:
-          description: 'Version for the manual release'
-          required: true
+  workflow_dispatch:
+    # Manual release / testing
+    inputs:
+      version:
+        description: 'Version for the manual release'
+        required: true
 
 jobs:
   build:
