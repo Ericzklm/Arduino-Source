@@ -1,0 +1,69 @@
+name: SerialPrograms MacOS Release
+
+on:
+  push:
+    tags:
+      # Start MacOS release flow when a new version tag is created
+      - 'v*'
+    workflow_dispatch:
+      # Manual release / testing
+      inputs:
+        version:
+          description: 'Version for the manual release'
+          required: true
+
+jobs:
+  build:
+    # Intel Macs may need macos-13 runner, this is only handling Apple Silicon
+    # TODO: Test forwards compatibility with macos-14, this is likely not backwards compatible
+    runs-on: macos-15
+    steps:
+      - name: Checkout Arduino-Source
+        uses: actions/checkout@v4
+
+      - name: Checkout Packages
+        uses: actions/checkout@v4
+        with:
+          repository: 'PokemonAutomation/Packages'
+          path: packages
+
+      - name: Copy Resources from Packages to working area
+        run: cp -r packages/SerialPrograms/Resources $GITHUB_WORKSPACE/Resources
+
+      # MacOS runners have Homebrew, Xcode, and Cmake already installed
+      - name: Install Dependencies
+        run: | 
+          brew install qt6
+          brew install tesseract tesseract-lang
+          brew install opencv
+
+      - name: Set release configuration for Cmake build
+        run: cmake SerialPrograms -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
+
+      # macos-15 runner should have 3 cores
+      - name: Build SerialPrograms.app
+        run: cmake --build . -j $(nproc)
+
+      # Use macdeployqt to bundle the app with dependencies
+      - name: Run macdeployqt
+        run: |
+          BREW_PREFIX=$(brew --prefix)
+          $BREW_PREFIX/opt/qt/bin/macdeployqt SerialPrograms.app
+
+      # Read-write format in case Resources needs to be updated
+      - name: Create disk image
+        run: hdiutil create -volname "SerialPrograms" -format UDRW -srcfolder SerialPrograms.app SerialPrograms.dmg
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SerialPrograms.dmg
+          path: SerialPrograms.dmg
+
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SerialPrograms.dmg
+          # Tag should be automatically set in the case of a tag push
+          tag_name: ${{ github.event.inputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
