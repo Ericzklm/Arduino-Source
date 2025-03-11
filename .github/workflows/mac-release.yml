@@ -48,10 +48,18 @@ jobs:
       - name: Build SerialPrograms.app
         run: cmake --build . -j ${{ github.event.inputs.jobs }}
 
+      - name: rpath resolution
+        run: |
+          BREW_PREFIX=$(brew --prefix)
+          cd $BREW_PREFIX/lib/QtGui.framework/Version/A
+          otool -L QtGui
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' QtGui
+          otool -L QtGui
+          cd $GITHUB_WORKSPACE
+          
       # Use macdeployqt to bundle the app with dependencies
       - name: Run macdeployqt
         run: |
-          BREW_PREFIX=$(brew --prefix)
           $BREW_PREFIX/opt/qt/bin/macdeployqt SerialPrograms.app
 
       # Read-write format in case Resources needs to be updated
