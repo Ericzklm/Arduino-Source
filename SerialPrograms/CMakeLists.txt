@@ -2319,15 +2319,19 @@ else()
     endif()
 
     # enable dpp integration
-    if ((APPLE) AND (CMAKE_SYSTEM_PROCESSOR MATCHES "(arm64)|(ARM64)"))
-        add_library(libdpp STATIC IMPORTED)
-        set_target_properties(libdpp PROPERTIES
-            IMPORTED_LOCATION ../3rdPartyBinaries/libdpp_macos_arm64.a
-            INTERFACE_COMPILE_DEFINITIONS "PA_DPP"
-            INTERFACE_LINK_LIBRARIES "-L/opt/homebrew/lib -lssl -lcrypto -lopus -lsodium -lz" # add dpp's deps
-        )
-        target_link_libraries(SerialPrograms PRIVATE libdpp)
-    endif()
+    # TODO: Needs further development to find the needed dependencies and link the libaries
+    # On manual compile on MacOS, the system processor is x86_64 due to Rosetta so this wouldn't run
+    # This breaks the build due to missing libraries if the system processor is arm64 like on the macos GitHub Runners 
+    #
+    # if ((APPLE) AND (CMAKE_SYSTEM_PROCESSOR MATCHES "(arm64)|(ARM64)"))
+    #     add_library(libdpp STATIC IMPORTED)
+    #     set_target_properties(libdpp PROPERTIES
+    #         IMPORTED_LOCATION ../3rdPartyBinaries/libdpp_macos_arm64.a
+    #         INTERFACE_COMPILE_DEFINITIONS "PA_DPP"
+    #         INTERFACE_LINK_LIBRARIES "-L/opt/homebrew/lib -lssl -lcrypto -lopus -lsodium -lz" # add dpp's deps
+    #     )
+    #     target_link_libraries(SerialPrograms PRIVATE libdpp)
+    # endif()
 
     if (APPLE)
         # Add -Wno-c11-extensions to avoid clang gives
