@@ -51,10 +51,11 @@ jobs:
       - name: rpath resolution
         run: |
           BREW_PREFIX=$(brew --prefix)
+          QT_VERSION=$(basename $(find $BREW_PREFIX/Cellar/qt -maxdepth 1 -type d | sort -V | tail -n 1))
           brew info qt
           find $BREW_PREFIX -name "QtGui.framework"
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
-          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' $BREW_PREFIX/opt/qt/lib/QtGui.framework/Versions/A/QtGui
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' $BREW_PREFIX/Cellar/qt/$QT_VERSION/lib/QtGui.framework/Versions/A/QtGui
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
           cd $GITHUB_WORKSPACE
           
