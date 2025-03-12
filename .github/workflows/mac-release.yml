@@ -55,7 +55,7 @@ jobs:
           brew info qt
           find $BREW_PREFIX -name "QtGui.framework"
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
-          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' $BREW_PREFIX/Cellar/qt/$QT_VERSION/lib/QtGui.framework/Versions/A/QtGui
+          install_name_tool -add_rpath $BREW_PREFIX/Cellar/qt/$QT_VERSION/lib SerialPrograms.app/Contents/MacOS/SerialPrograms
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
           cd $GITHUB_WORKSPACE
           
