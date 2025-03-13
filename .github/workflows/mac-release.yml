@@ -37,9 +37,13 @@ jobs:
       # MacOS runners have Homebrew, Xcode, and Cmake already installed
       - name: Install Dependencies
         run: | 
-          brew install qt6
           brew install tesseract tesseract-lang
           brew install opencv
+
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.2'
+          modules: 'qtmultimedia qtserialport'
 
       - name: Set release configuration for Cmake build
         run: cmake SerialPrograms -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
