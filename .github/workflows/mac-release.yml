@@ -55,7 +55,14 @@ jobs:
           brew info qt
           find $BREW_PREFIX -name "QtGui.framework"
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
-          install_name_tool -add_rpath $BREW_PREFIX/Cellar/qt/$QT_VERSION/lib/QtGui.framework/Versions/A/QtGui SerialPrograms.app/Contents/MacOS/SerialPrograms
+          cd $BREW_PREFIX/lib/QtGui.framework/Versions/A
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' QtGui
+          cd $BREW_PREFIX/Frameworks/QtGui.framework/Versions/A
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' QtGui
+          cd $BREW_PREFIX/Cellar/qt/$QT_VERSION/lib/QtGui.framework/Versions/A
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' QtGui
+          cd $BREW_PREFIX/Cellar/qt/$QT_VERSION/frameworks/QtGui.framework/Versions/A
+          install_name_tool -id '@rpath/QtGui.framework/Versions/A/QtGui' QtGui
           cd $GITHUB_WORKSPACE
           
       # Use macdeployqt to bundle the app with dependencies
