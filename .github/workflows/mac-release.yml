@@ -51,7 +51,7 @@ jobs:
 
       - uses: jurplel/install-qt-action@v4
         with:
-          version: {{ github.event.inputs.qt_version }}
+          version: ${{ github.event.inputs.qt_version }}
           modules: 'qtmultimedia qtserialport'
 
       - name: Set release configuration for Cmake build
@@ -91,7 +91,7 @@ jobs:
           BREW_PREFIX=$(brew --prefix)
           cp macdeployqtfix/macdeployqtfix.py $GITHUB_WORKSPACE/macdeployqtfix.py
           chmod +x macdeployqtfix.py
-          python macdeployqtfix.py SerialPrograms.app $BREW_PREFIX/Cellar/qt/{{ github.event.inputs.qt_version }}
+          python macdeployqtfix.py SerialPrograms.app $BREW_PREFIX/Cellar/qt/${{ github.event.inputs.qt_version }}
 
       # Dummy codesign
       - name: Codesign
