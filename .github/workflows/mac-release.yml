@@ -15,6 +15,14 @@ on:
         description: 'Number of parallel jobs to build with'
         default: 1
         type: number
+      qt_version:
+        description: 'Qt version to use'
+        required: true
+        default: '6.8.2'
+        type: choice
+        options:
+          - '6.8.2'
+ 
 
 jobs:
   build:
@@ -43,7 +51,7 @@ jobs:
 
       - uses: jurplel/install-qt-action@v4
         with:
-          version: '6.8.2'
+          version: {{ github.event.inputs.qt_version }}
           modules: 'qtmultimedia qtserialport'
 
       - name: Set release configuration for Cmake build
@@ -68,10 +76,20 @@ jobs:
       - name: Run macdeployqt
         run: |
           BREW_PREFIX=$(brew --prefix)
-          macdeployqt SerialPrograms.app -verbose=3 -no-strip
+          macdeployqt SerialPrograms.app -verbose=3
       # cp $BREW_PREFIX/opt/gcc/lib/gcc/current/libgcc_s.1.1.dylib SerialPrograms.app/Contents/Frameworks
       # cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
 
+      - name: Run macdeployqtfix
+        uses: actions/checkout@v4
+        with:
+          repository: 'arl/macdeployqtfix'
+          path: macdeployqtfix
+        run: |
+          BREW_PREFIX=$(brew --prefix)
+          cp macdeployqtfix/macdeployqtfix.py $GITHUB_WORKSPACE/macdeployqtfix.py
+          chmod +x macdeployqtfix.py
+          python macdeployqtfix.py SerialPrograms.app $BREW_PREFIX/Cellar/qt/{{ github.event.inputs.qt_version }}
 
       # Dummy codesign
       - name: Codesign
