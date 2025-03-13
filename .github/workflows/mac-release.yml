@@ -80,11 +80,13 @@ jobs:
       # cp $BREW_PREFIX/opt/gcc/lib/gcc/current/libgcc_s.1.1.dylib SerialPrograms.app/Contents/Frameworks
       # cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
 
-      - name: Run macdeployqtfix
+      - name: Checkout macdeployqtfix
         uses: actions/checkout@v4
         with:
           repository: 'arl/macdeployqtfix'
           path: macdeployqtfix
+
+      - name: Run macdeployqt
         run: |
           BREW_PREFIX=$(brew --prefix)
           cp macdeployqtfix/macdeployqtfix.py $GITHUB_WORKSPACE/macdeployqtfix.py
