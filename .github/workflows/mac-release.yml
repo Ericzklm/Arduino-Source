@@ -37,7 +37,7 @@ jobs:
   build:
     # Intel Macs may need macos-13 runner, this is only handling Apple Silicon
     # TODO: Test forwards compatibility with macos-14, this is likely not backwards compatible
-    runs-on: macos-15
+    runs-on: ${{ github.event.inputs.runner }}
     steps:
       - name: Checkout Arduino-Source
         uses: actions/checkout@v4
