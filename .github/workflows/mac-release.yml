@@ -22,6 +22,15 @@ on:
         type: choice
         options:
           - '6.8.2'
+          - '6.5.3'
+      runner:
+        description: "MacOS Runner"
+        required: true
+        default: "macos-15"
+        type: choice
+        options:
+          - "macos-15"
+          - "macos-13"
  
 
 jobs:
