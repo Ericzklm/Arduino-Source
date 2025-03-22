@@ -78,6 +78,8 @@ jobs:
           find $BREW_PREFIX -name "QtGui.framework"
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
           install_name_tool -add_rpath "@executable_path/../Frameworks" SerialPrograms.app/Contents/MacOS/SerialPrograms
+          mkdir SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
           cd $GITHUB_WORKSPACE
           
       # Use macdeployqt to bundle the app with dependencies
@@ -89,18 +91,18 @@ jobs:
       # cp $BREW_PREFIX/opt/gcc/lib/gcc/current/libgcc_s.1.1.dylib SerialPrograms.app/Contents/Frameworks
       # cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
 
-      - name: Checkout macdeployqtfix
-        uses: actions/checkout@v4
-        with:
-          repository: 'arl/macdeployqtfix'
-          path: macdeployqtfix
+      # - name: Checkout macdeployqtfix
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: 'arl/macdeployqtfix'
+      #     path: macdeployqtfix
 
-      - name: Run macdeployqt
-        run: |
-          BREW_PREFIX=$(brew --prefix)
-          cp macdeployqtfix/macdeployqtfix.py $GITHUB_WORKSPACE/macdeployqtfix.py
-          chmod +x macdeployqtfix.py
-          python macdeployqtfix.py SerialPrograms.app $BREW_PREFIX/Cellar/qt/${{ github.event.inputs.qt_version }}
+      # - name: Run macdeployqt
+      #   run: |
+      #     BREW_PREFIX=$(brew --prefix)
+      #     cp macdeployqtfix/macdeployqtfix.py $GITHUB_WORKSPACE/macdeployqtfix.py
+      #     chmod +x macdeployqtfix.py
+      #     python macdeployqtfix.py SerialPrograms.app $BREW_PREFIX/Cellar/qt/${{ github.event.inputs.qt_version }}
 
       # Dummy codesign
       - name: Codesign
