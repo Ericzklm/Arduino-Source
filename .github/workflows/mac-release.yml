@@ -80,6 +80,11 @@ jobs:
           cp $BREW_PREFIX/Cellar/webp/1.5.0/lib/libsharpyuv.0.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/jpeg-xl/0.11.1/lib/libjxl_cms.0.11.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonComputationalGeometry-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersVerdict-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkfmt-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersGeometry-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cd $GITHUB_WORKSPACE
           
       # Use macdeployqt to bundle the app with dependencies
