@@ -72,6 +72,7 @@ jobs:
       # Important: GitHub MacOS runners do not have the lib area in its rpath by default. It must manually be added for frameworks to be discovered and added to the bundle
       - name: rpath resolution
         run: |
+          BREW_PREFIX=$(brew --prefix)
           install_name_tool -add_rpath $BREW_PREFIX/lib SerialPrograms.app/Contents/MacOS/SerialPrograms
           otool -l SerialPrograms.app/Contents/MacOS/SerialPrograms | grep -A2 LC_RPATH
           
