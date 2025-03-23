@@ -67,7 +67,7 @@ jobs:
           cd bin
           cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
           cmake --build . -j ${{ github.event.inputs.jobs }}
-          cp -r SerialPrograms.app ../../SerialPrograms.app
+          cp -r SerialPrograms.app ../../../SerialPrograms.app
 
       # Important: GitHub MacOS runners do not have the lib area in its rpath by default. It must manually be added for frameworks to be discovered and added to the bundle
       - name: rpath resolution
