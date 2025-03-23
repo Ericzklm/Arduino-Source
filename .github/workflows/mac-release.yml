@@ -65,7 +65,7 @@ jobs:
           cd Arduino-Source/SerialPrograms
           mkdir bin
           cd bin
-          cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_RPATH="@executable_path/../Frameworks"
+          cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
           cmake --build . -j ${{ github.event.inputs.jobs }}
           cp -r SerialPrograms.app ../../../SerialPrograms.app
 
@@ -86,7 +86,6 @@ jobs:
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonSystem-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
-          cd $GITHUB_WORKSPACE
           
       # Use macdeployqt to bundle the app with dependencies
       - name: Run macdeployqt
