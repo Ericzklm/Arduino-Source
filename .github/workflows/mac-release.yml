@@ -61,7 +61,7 @@ jobs:
           modules: 'qtmultimedia qtserialport'
 
       - name: Set release configuration for Cmake build
-        run: cmake SerialPrograms -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
+        run: cmake SerialPrograms -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_RPATH="@executable_path/../Frameworks"
 
       # macos-15 runner should have 3 cores
       - name: Build SerialPrograms.app
@@ -74,7 +74,8 @@ jobs:
           brew info qt
           find $BREW_PREFIX -name "QtGui.framework"
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
-          install_name_tool -add_rpath "@executable_path/../Frameworks" SerialPrograms.app/Contents/MacOS/SerialPrograms
+          otool -l SerialPrograms.app/Contents/MacOS/SerialPrograms | grep -A2 LC_RPATH
+          # install_name_tool -add_rpath "@executable_path/../Frameworks" SerialPrograms.app/Contents/MacOS/SerialPrograms
           mkdir SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/webp/1.5.0/lib/libsharpyuv.0.dylib SerialPrograms.app/Contents/Frameworks
@@ -85,6 +86,7 @@ jobs:
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersGeometry-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkFiltersCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonCore-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
+          cp $BREW_PREFIX/Cellar/vtk/9.4.1_2/lib/libvtkCommonSystem-9.4.1.dylib SerialPrograms.app/Contents/Frameworks
           cd $GITHUB_WORKSPACE
           
       # Use macdeployqt to bundle the app with dependencies
