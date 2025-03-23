@@ -65,7 +65,7 @@ jobs:
           cd Arduino-Source
           mkdir bin
           cd bin
-          cmake SerialPrograms -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
+          cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
 
       - name: Build SerialPrograms.app
         run: cmake --build . -j ${{ github.event.inputs.jobs }}
