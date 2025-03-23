@@ -76,6 +76,8 @@ jobs:
           otool -L SerialPrograms.app/Contents/MacOS/SerialPrograms
           otool -l SerialPrograms.app/Contents/MacOS/SerialPrograms | grep -A2 LC_RPATH
           # install_name_tool -add_rpath "@executable_path/../Frameworks" SerialPrograms.app/Contents/MacOS/SerialPrograms
+          install_name_tool -add_rpath $BREW_PREFIX/lib SerialPrograms.app/Contents/MacOS/SerialPrograms
+          otool -l SerialPrograms.app/Contents/MacOS/SerialPrograms | grep -A2 LC_RPATH
           mkdir SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/protobuf/29.3/lib/libutf8_validity.dylib SerialPrograms.app/Contents/Frameworks
           cp $BREW_PREFIX/Cellar/webp/1.5.0/lib/libsharpyuv.0.dylib SerialPrograms.app/Contents/Frameworks
