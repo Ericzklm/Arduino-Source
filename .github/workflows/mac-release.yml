@@ -62,7 +62,7 @@ jobs:
 
       - name: Set release configuration for Cmake build
         run: |
-          cd Arduino-Source
+          cd Arduino-Source/SerialPrograms
           mkdir bin
           cd bin
           cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
