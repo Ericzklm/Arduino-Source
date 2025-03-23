@@ -65,7 +65,7 @@ jobs:
           cd Arduino-Source/SerialPrograms
           mkdir bin
           cd bin
-          cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release
+          cmake .. -DUNIX_LINK_TESSERACT:BOOL=true -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_RPATH="@executable_path/../Frameworks"
           cmake --build . -j ${{ github.event.inputs.jobs }}
           cp -r SerialPrograms.app ../../../SerialPrograms.app
 
