@@ -116,13 +116,13 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SerialPrograms.dmg
-          path: SerialPrograms.dmg
+          name: SerialPrograms-Installer.dmg
+          path: SerialPrograms-Installer.dmg
 
       - name: GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: SerialPrograms.dmg
+          files: SerialPrograms-Installer.dmg
           # Tag should be automatically set in the case of a tag push
           tag_name: ${{ github.event.inputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
