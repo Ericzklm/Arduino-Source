@@ -677,6 +677,7 @@ SOURCES += \
     Source/PokemonLGPE/Inference/PokemonLGPE_ShinySymbolDetector.cpp \
     Source/PokemonLGPE/Programs/Farming/PokemonLGPE_DailyItemFarmer.cpp \
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_AlolanTrade.cpp \
+    Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_FossilRevival.cpp \
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_GiftReset.cpp \
     Source/PokemonLGPE/Programs/PokemonLGPE_GameEntry.cpp \
     Source/PokemonLGPE/PokemonLGPE_Panels.cpp \
@@ -1870,6 +1871,7 @@ HEADERS += \
     Source/PokemonLGPE/Inference/PokemonLGPE_ShinySymbolDetector.h \
     Source/PokemonLGPE/Programs/Farming/PokemonLGPE_DailyItemFarmer.h \
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_AlolanTrade.h \
+    Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_FossilRevival.h \
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_GiftReset.h \
     Source/PokemonLGPE/Programs/PokemonLGPE_GameEntry.h \
     Source/PokemonLGPE/PokemonLGPE_Panels.h \
@@ -2241,7 +2243,7 @@ HEADERS += \
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_BasicRNG.h \
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_CramomaticRNG.h \
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_SeedFinder.h \
-    Source/PokemonSwSh/Programs/ReleaseHelpers.h \
+    Source/PokemonSwSh/Programs/PokemonSwSh_ReleaseHelpers.h \
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-BerryTree.h \
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-Fishing.h \
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-IoATrade.h \

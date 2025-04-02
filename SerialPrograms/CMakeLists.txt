@@ -1380,6 +1380,8 @@ file(GLOB MAIN_SOURCES
     Source/PokemonLGPE/Programs/Farming/PokemonLGPE_DailyItemFarmer.h
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_AlolanTrade.cpp
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_AlolanTrade.h
+    Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_FossilRevival.cpp
+    Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_FossilRevival.h
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_GiftReset.cpp
     Source/PokemonLGPE/Programs/ShinyHunting/PokemonLGPE_GiftReset.h
     Source/PokemonLGPE/Programs/PokemonLGPE_GameEntry.cpp
@@ -2117,7 +2119,7 @@ file(GLOB MAIN_SOURCES
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_CramomaticRNG.h
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_SeedFinder.cpp
     Source/PokemonSwSh/Programs/RNG/PokemonSwSh_SeedFinder.h
-    Source/PokemonSwSh/Programs/ReleaseHelpers.h
+    Source/PokemonSwSh/Programs/PokemonSwSh_ReleaseHelpers.h
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-BerryTree.cpp
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-BerryTree.h
     Source/PokemonSwSh/Programs/ShinyHuntAutonomous/PokemonSwSh_ShinyHuntAutonomous-Fishing.cpp
