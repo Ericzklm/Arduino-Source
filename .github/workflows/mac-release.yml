@@ -5,6 +5,7 @@ on:
     branches:
       - 'v*'
   workflow_dispatch:
+    # Dummy
     # Manual release / testing
     inputs:
       version:
