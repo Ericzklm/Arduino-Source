@@ -36,6 +36,11 @@ struct BoxCursorCoordinates{
     const static uint8_t INVALID = 255;
 };
 
+template <typename T>
+class DetectorToFinderWrapper : public DetectorToFinder<T> {
+public:
+    using DetectorToFinder<T>::DetectorToFinder;
+};
 
 // Detect if the game is in box system view.
 // Also handle moving cursor to target slot in box system view
@@ -67,10 +72,10 @@ private:
     uint8_t m_found_col = 0;
 };
 
-class BoxWatcher : public DetectorToFinder<BoxDetector>{
+class BoxWatcher : public DetectorToFinderWrapper<BoxDetector>{
 public:
     BoxWatcher(Color color = COLOR_RED)
-         : DetectorToFinder("BoxWatcher", std::chrono::milliseconds(250), color)
+         : DetectorToFinderWrapper<BoxDetector>("BoxWatcher", std::chrono::milliseconds(250), color)
     {}
 };
 
@@ -87,10 +92,10 @@ public:
 private:
     ButtonDetector m_right_stick_up_down_detector;
 };
-class SomethingInBoxCellWatcher : public DetectorToFinder<SomethingInBoxCellDetector>{
+class SomethingInBoxCellWatcher : public DetectorToFinderWrapper<SomethingInBoxCellDetector>{
 public:
     SomethingInBoxCellWatcher(Color color, VideoOverlay* overlay = nullptr)
-         : DetectorToFinder("SomethingInBoxCell", std::chrono::milliseconds(250), color, overlay)
+         : DetectorToFinderWrapper<SomethingInBoxCellDetector>("SomethingInBoxCell", std::chrono::milliseconds(250), color, overlay)
     {}
 };
 

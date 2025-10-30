@@ -111,7 +111,14 @@ private:
     ImageFloatBox m_last_detected;
     std::optional<OverlayBoxScope> m_last_detected_box;
 };
-class ButtonWatcher : public DetectorToFinder<ButtonDetector>{
+
+template <typename T>
+class DetectorToFinderWrapper : public DetectorToFinder<T> {
+public:
+    using DetectorToFinder<T>::DetectorToFinder;
+};
+
+class ButtonWatcher : public DetectorToFinderWrapper<ButtonDetector>{
 public:
     ButtonWatcher(
         Color color,
@@ -120,7 +127,7 @@ public:
         VideoOverlay* overlay = nullptr,
         std::chrono::milliseconds hold_duration = std::chrono::milliseconds(250)
     )
-         : DetectorToFinder("ButtonWatcher", hold_duration, color, button_type, box, overlay)
+         : DetectorToFinderWrapper<ButtonDetector>("ButtonWatcher", hold_duration, color, button_type, box, overlay)
     {}
 };
 
