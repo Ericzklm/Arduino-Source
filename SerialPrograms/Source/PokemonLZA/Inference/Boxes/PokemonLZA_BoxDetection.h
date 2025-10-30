@@ -36,12 +36,6 @@ struct BoxCursorCoordinates{
     const static uint8_t INVALID = 255;
 };
 
-template <typename T>
-class DetectorToFinderWrapper : public DetectorToFinder<T> {
-public:
-    using DetectorToFinder<T>::DetectorToFinder;
-};
-
 // Detect if the game is in box system view.
 // Also handle moving cursor to target slot in box system view
 class BoxDetector : public StaticScreenDetector{
